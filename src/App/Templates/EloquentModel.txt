@@ -1,0 +1,16 @@
+<?php
+/**
+*You can  use eloquent along with the inbuilt tableDataObject trait
+*Create something  awesome.
+**/
+use Illuminate\Database\Eloquent\Model;
+
+class %classname%Model extends Model
+{
+    protected $table = "%tablename%";
+    protected $guarded = [];
+    //protected $primaryKey = '%tablename%id';
+     public $timestamps = false;
+
+
+}

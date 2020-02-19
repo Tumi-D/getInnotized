@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/app/config/config.php';
+require_once  __DIR__ . '/app/config/config_env.php';
+require_once  __DIR__ . '/app/helpers/general_helper.php';
+// require_once 'helpers/email_helper.php';
+require_once  __DIR__ . '/app/helpers/email.php';
+// require_once __DIR__ . '/app/bootstrap.php';
+spl_autoload_register(function ($class) {
+
+    $pathContorllers = APPROOT . '/controllers/' . $class . '.php';
+    $pathLibs = APPROOT . '/libraries/' . $class . '.php';
+    $pathModels = APPROOT . '/models/' . $class . '.php';
+    $pathServices = APPROOT . '/service/' . $class . '.php';
+    $factoriesServices = APPROOT . '/models/factories/' . $class . '.php';
+    $migrationServices = APPROOT . '/models/migrations/' . $class . '.php';
+
+
+    if (file_exists($pathContorllers)) {
+        require_once $pathContorllers;
+    } elseif (file_exists($pathLibs)) {
+        require_once $pathLibs;
+    } elseif (file_exists($pathModels)) {
+        require_once $pathModels;
+    } elseif (file_exists($pathServices)) {
+        require_once $pathServices;
+    } elseif (file_exists($factoriesServices)) {
+        require_once $factoriesServices;
+    } elseif (file_exists($migrationServices)) {
+        require_once $migrationServices;
+    }
+});
+
+
+$connectedDb = new Database();
+
+require_once __DIR__ . '\src\Register\register.php';
+require_once __DIR__ . '\src\Register\eloquence.php';
+
+
+exit();

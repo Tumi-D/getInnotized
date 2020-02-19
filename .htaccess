@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine on
+  RewriteBase /
+  RewriteRule ^(vendor)($|/) - [L]
+
+  RewriteRule ^public/ - [NC,L]
+  RewriteCond %{DOCUMENT_ROOT}/public/$1 -f [NC]
+  RewriteRule ^(.*)$ /public/$1 [L]
+
+  RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule>

@@ -1,0 +1,8 @@
+<?php
+
+
+class %classname%Model extends tableDataObject
+{
+  
+    const TABLENAME = '%tablename%';
+}
