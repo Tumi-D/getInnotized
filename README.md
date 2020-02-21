@@ -1,6 +1,6 @@
 # GET INNOTIZED FRESH INSTALLATION
 
-This is an agency baning application. It concentrates on creating accounts, products, making payments, creating invoices, connecting to third party api's etc
+This page is going to be  used for updating new features released on the innotized framework thank yoou
 
 
 
