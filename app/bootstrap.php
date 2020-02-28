@@ -6,6 +6,7 @@ require_once 'config/config_env.php';
 require_once 'helpers/general_helper.php';
 // require_once 'helpers/email_helper.php';
 require_once 'helpers/email.php';
+require_once 'helpers/validation.php';
 
 
 // Load everything we require via composer

@@ -14,20 +14,20 @@ class MakeControllerCommand extends Command
     {
         $this->setName('make:controller')
             ->setDescription('Creates a controller class')
-            ->setHelp('                         <info>Pass the type of controller you want to create Use  the -P option to create post controllers. 
-                         Use the -A to create both normal controllers and post controllers.<comment>(recommended)</comment></info>')
+            ->setHelp('                         <info>Pass the type of controller you want to create Use  the -p option to create post controllers. 
+                         Use the -a to create both normal controllers and post controllers.<comment>(recommended)</comment></info>')
             ->addArgument('controllername', InputArgument::REQUIRED, 'Pass the name of the controller.')
             ->addOption(
                 'post',
-                'P',
+                'p',
                 InputOption::VALUE_NONE,
-                "Pass options --post/-P to create post controllers."
+                "Pass options --post/-p to create post controllers."
             )
             ->addOption(
                 'all',
-                'A',
+                'a',
                 InputOption::VALUE_NONE,
-                "Pass options --all/-A to create both post controllers and get controllers. <comment>(Recommended)</comment>"
+                "Pass options --all/-a to create both post controllers and get controllers. <comment>(Recommended)</comment>"
             );
     }
 

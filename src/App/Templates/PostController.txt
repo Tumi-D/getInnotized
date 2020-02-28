@@ -3,7 +3,7 @@
 class  %classname%  extends PostController
 {
     /**
-    All post and put requests should go through here;
+    * All post and put/patch/delete requests should go through here;
     */
      public function index(){
 

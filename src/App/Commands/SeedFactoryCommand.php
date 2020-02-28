@@ -20,7 +20,7 @@ class SeedFactoryCommand extends Command
             ->setHelp('Demonstration of custom commands created by Symfony Console component.')
             ->addOption(
                 'table',
-                'T',
+                't',
                 InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY,
                 '<comment>Please enter the tables you wish to seed?</comment>',
             );

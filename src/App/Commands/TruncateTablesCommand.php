@@ -11,7 +11,7 @@ class TruncateTablesCommand extends Command
 {
     protected function configure()
     {
-        $this->setName('truncate:db')
+        $this->setName('empty:db')
             ->setDescription('Deletes all entries in the database/Trucates table')
             ->setHelp('Deletes all entries in the database/Trucates table');
     }

@@ -18,9 +18,9 @@ class MakemodelCommand extends Command
             ->addArgument('tablename', InputArgument::REQUIRED, 'Pass the name of the table whose model you would like to create.')
             ->addOption(
                 'eloquent',
-                'E',
+                'e',
                 InputOption::VALUE_NONE,
-                '<comment>Option -E or --eloquent for creating element models </comment>',
+                '<comment>Option -e or --eloquent for creating element models </comment>',
             );
     }
 

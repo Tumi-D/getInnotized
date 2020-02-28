@@ -22,7 +22,7 @@ class RunMigrationCommand extends Command
         $directory = dirname(dirname(dirname(dirname(__FILE__)))) . "\app\models\\migrations\\";
 
         if (!is_dir($directory)) {
-            exit('Invalid diretory path');
+            exit('<error>Invalid diretory path</error>');
         }
 
         $files = array();

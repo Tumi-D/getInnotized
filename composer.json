@@ -15,7 +15,9 @@
     "firebase/php-jwt": "^5.0",
     "twbs/bootstrap": "^4.3",
     "symfony/console": "^5.0",
-    "illuminate/database": "^6.15"
+    "illuminate/database": "^6.15",
+    "twilio/sdk": "^6.0",
+    "psy/psysh": "@stable"
   },
   "autoload": {
     "psr-4": {
@@ -26,6 +28,7 @@
     ]
   },
   "require-dev": {
-    "fzaninotto/faker": "^1.9"
+    "fzaninotto/faker": "^1.9",
+    "symfony/var-dumper": "^5.0"
   }
 }

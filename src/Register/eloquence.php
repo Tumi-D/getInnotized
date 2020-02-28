@@ -1,5 +1,6 @@
 <?php
-require_once '/laragon/www/umo/vendor/autoload.php';
+
+require_once dirname(dirname(dirname(__FILE__))) . '/vendor/autoload.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

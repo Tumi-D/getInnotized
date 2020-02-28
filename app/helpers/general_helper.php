@@ -73,7 +73,7 @@ function generateOtp()
     }
 }
 
-function test_input($input)
+function testinput($input)
 {
     $input = trim($input);
     $input = stripslashes($input);

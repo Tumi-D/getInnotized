@@ -1,0 +1,17 @@
+<?php
+
+use Illuminate\Database\Capsule\Manager as Migration;
+
+class %classname%TableMigration  extends Migration
+{
+
+    public static function handle()
+    {
+        self::schema()->dropIfExists('%tablename%');
+        self::schema()->create('%tablename%', function ($table) {
+            $table->increments('id');
+            
+            $table->timestamps();
+        });
+    }
+}

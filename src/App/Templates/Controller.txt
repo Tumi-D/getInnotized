@@ -4,7 +4,7 @@ Class  %classname%  extends Controller
 {
     public  function index(){
         //Return view
-       // $this->view("pages/index");
+       // $this->view("pages/%classname%");
     }
     
 }

@@ -13,13 +13,14 @@ class  %classname%Factory
    {
       self::$number = $number;
    }
-
+ 
    public static function run()
    {
       $factory = Factory::create();
       for ($i = 0; $i < self::$number; $i++) {
-          $%tablename% = new %classname%Model();
-         //$%tablename%->recordObject->firstname = $factory->firstName();
+         $%tablename% = new %classname%Model();
+         $%tablename%col = &$%tablename%->recordObject;
+         // $%tablename%col->firstname = $factory->firstName();
          //Add the other record objects
          // $%tablename%->store();
       }

@@ -10,7 +10,6 @@ class %classname%Model extends Model
     protected $table = "%tablename%";
     protected $guarded = [];
     //protected $primaryKey = '%tablename%id';
-     public $timestamps = false;
-
+    //protected $timestamp = null;
 
 }
