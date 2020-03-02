@@ -17,7 +17,8 @@
     "symfony/console": "^5.0",
     "illuminate/database": "^6.15",
     "twilio/sdk": "^6.0",
-    "psy/psysh": "@stable"
+    "psy/psysh": "@stable",
+    "latte/latte": "^2.6"
   },
   "autoload": {
     "psr-4": {

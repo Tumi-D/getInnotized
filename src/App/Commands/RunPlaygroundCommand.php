@@ -19,6 +19,7 @@ class RunPlaygroundCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $output->writeln(sprintf('<info>Innotizer V.1.0.0 beta </info>'));
         $shell = new Shell;
         $shell->run();
         return 1;
