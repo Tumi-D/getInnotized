@@ -2,7 +2,7 @@
 vendor/
 public/vendor
 app/uploads
-app/config/config_env.php
+# app/config/config_env.php
 app/config/config.php
 .idea/
 public/info.php
