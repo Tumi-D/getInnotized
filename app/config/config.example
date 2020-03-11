@@ -1,0 +1,40 @@
+<?php
+
+// constant to allow additional includes, debug fuctions, whatever only on dev environments...
+define('DEVMODE', false);
+
+// enable disabling of UI during maintenance
+define('MAINTENANCE', false);
+
+//DB Configuartions
+define('DB_HOST', 'localhost');
+define('DB_USER', 'root');
+define('DB_PASS', 'innotize_pas');
+define('DB_NAME', 'innotize_db');
+define('DB_PORT', 3306);
+// Application Root
+define('APPROOT', dirname(dirname(__FILE__)));
+
+//Src Root
+define('SRCROOT', dirname(dirname(dirname(__FILE__))) . "\src");
+
+//Vendor Root
+define('VENDORROOT', dirname(dirname(dirname(__FILE__))));
+
+
+define('URLROOT', 'https://umo.local/');
+define('GMAPSAPI', 'AIzaSyB1nEal4lqDWdBz9mf79KUd0zGZdgArVfY');
+
+//Gmail configurations NB:remember to disable security 
+//define('MAILPORT', 465);
+//define('MAILHOST', 'smtp.gmail.com');
+//define('MAILUSERNAME', 'example.email.com');
+//define('MAILPASSWORD', 'password');
+
+
+//Mail Trap  configurations
+define('TESTMAIL', 'example.email.com');
+define('MAILPORT', 2525);
+define('MAILHOST', 'smtp.mailtrap.io');
+define('MAILUSERNAME', 'username');
+define('MAILPASSWORD', 'secret');
