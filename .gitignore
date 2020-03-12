@@ -2,8 +2,8 @@
 vendor
 public\vendor
 app\uploads
-app\config\config.php
-app\config\config_env.php
+app/config/config.php
+app/config/config_env.php
 .idea
 public\info.php
 public\php_errors.log
