@@ -11,17 +11,13 @@ require_once 'helpers/validation.php';
 // Load everything we require via composer
 require('../vendor/autoload.php');
 $latte = new Latte\Engine;
+$latte->setTempDirectory(SRCROOT . '/Tempdir');
+$latte->setAutoRefresh(true);
 
-$latte->setTempDirectory('/path/to/tempdir');
 
-$parameters = [
-	'items' => ['one', 'two', 'three'],
-];
 
-// render to output
-$latte->render('template.latte', $parameters);
 // or render to string
-$html = $latte->renderToString('template.latte', $parameters);
+// $html = $latte->renderToString('template.latte', $parameters);
 
 /*
  * Autoload Core Libraries
