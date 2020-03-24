@@ -11,7 +11,7 @@ use Console\App\Commands\RunPlaygroundCommand;
 use Console\App\Commands\SeedFactoryCommand;
 use Console\App\Commands\TruncateTablesCommand;
 
-$app =  new Symfony\Component\Console\Application('GetInnotized Installer', '1.0.0');
+$app =  new Symfony\Component\Console\Application('GetInnotized Framework', '1.0.0');
 $app->add(new ClearcacheCommand());
 $app->add(new MakemodelCommand());
 $app->add(new MakeMigrationCommand());
