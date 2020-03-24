@@ -12,7 +12,7 @@ use Twilio\TwiML\Voice\Say;
  * @param  array
  * @return array
  */
-function validate($rules = [], $exceptions = [])
+function validate($rules = [], $page = '', $exceptions = [])
 {
     // sendSMS();
     // validatePhoneNumber('0267205395');
@@ -36,8 +36,23 @@ function validate($rules = [], $exceptions = [])
         $errors = checkMinLength($rules,  $errors);
         $errors = checkMaxLength($rules,  $errors);
         $errors = checkIFNumeric($rules, $errors);
+        $errors = checkForUrl($rules, $errors);
         $errors = sanitizeErrors($errors);
-        return $errors;
+        // return $errors;
+        //Update will implement later
+        if (count((array) $errors) && $page != '' && $page != "json") {
+            $data['error'] =   $errors;
+            $error = new Controller();
+            $error->view($page, $data);
+            die;
+        } elseif ($page != '' && $page == 'json') {
+            echo json_encode($errors);
+            die;
+        } elseif ($page == '') {
+            return $errors;
+        } else {
+            return  $errors;
+        }
     }
 }
 
@@ -74,7 +89,7 @@ function checkPhoneValidity($rules = [],  $errors = array())
 }
 
 
-/*checkPhoneValidity() checks if parameter is required
+/*checkIFNumeric checks if value is a number
 * @param  array rules
 * @param  array errors
 * @return array errors
@@ -94,7 +109,7 @@ function checkIFNumeric($rules = [],  $errors = array())
 }
 
 /**
- *checkIsRequired() checks if parameter is required
+ *checkIsRequired checks if parameter is required
  * @param  array rules
  * @param  array errors
  * @return array errors
@@ -113,7 +128,7 @@ function checkIsRequired($rules = [],  $errors = array())
 }
 
 /**
- * checkMinLength() checks if minimum length is reached
+ * checkMinLength checks if minimum length is reached
  * @param  array rules
  * @param  array errors
  * @return array errors
@@ -174,7 +189,7 @@ function checkEmailValidity($rules = [],  $errors = array())
     foreach ($rules as $key => $value) {
         $array = explode('|', $value);
         if (in_array('email', $array) && !empty($_POST[$key]) && !preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/", testinput($_POST[$key]))) {
-            $message = array($key => array($key . ' is invalid  .Email in is incorrect'));
+            $message = array($key => array($key . ' is invalid  .Email  is incorrect'));
             array_push($errors, $message);
         }
     }
@@ -201,6 +216,23 @@ function checkForString($rules = [],  $errors = array())
     return $errors;
 }
 
+/**
+ *Checks if input is a valid Url
+ * @param  array rules
+ * @param  array errors
+ * @return array errors
+ */
+function checkForUrl($rules = [],  $errors = array())
+{
+    foreach ($rules as $key => $value) {
+        $array = explode('|', $value);
+        if (in_array('url', $array) && !empty($_POST[$key]) && !filter_var($_POST[$key], FILTER_VALIDATE_URL)) {
+            $message = array($key => array($key . 'url invalid <b>hint:</b>please add <b>http/https</b> to url'));
+            array_push($errors, $message);
+        }
+    }
+    return $errors;
+}
 /**
  *checkUniqueFields() checks if input is a unique in specified table
  * @param  array rules
@@ -400,10 +432,10 @@ function errors($valuekey)
         $errors = $valuekey;
         if (is_array($errors)) {
             foreach ($errors as $key => $error) {
-                echo "<i class='error'>$error<i/>";
+                echo $error;
             }
         } else {
-            echo "<i class='error'>$errors<i/>";
+            echo $errors;
         }
         return true;
     } else {
@@ -438,16 +470,16 @@ function bootstrapErrors($valuekey)
  * @param  mixed errorbject with valuekey
  * @return bool true
  */
-function ToastErrors($valuekey)
+function Toast($valuekey, $type = 'error')
 {
     if (isset($valuekey)) {
-        $errors = $valuekey;
-        if (is_array($errors)) {
-            foreach ($errors as $key => $error) {
-                echo "<script>toastr.error('$errors')</script>";
+        $data = $valuekey;
+        if (is_array($data)) {
+            foreach ($data as $key => $error) {
+                echo "<script>toastr.{$type}'('$data')</script>";
             }
         } else {
-            echo "<script>toastr.error('$errors')</script>";
+            echo "<script>toastr.{$type}('$data')</script>";
         }
         return true;
     } else {

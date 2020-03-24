@@ -9,8 +9,8 @@ define('MAINTENANCE', false);
 //DB Configuartions
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'innotize_pas');
-define('DB_NAME', 'innotize_db');
+define('DB_PASS', 'password');
+define('DB_NAME', 'database');
 define('DB_PORT', 3306);
 // Application Root
 define('APPROOT', dirname(dirname(__FILE__)));
@@ -25,16 +25,16 @@ define('VENDORROOT', dirname(dirname(dirname(__FILE__))));
 define('URLROOT', 'https://umo.local/');
 define('GMAPSAPI', 'AIzaSyB1nEal4lqDWdBz9mf79KUd0zGZdgArVfY');
 
-//Gmail configurations NB:remember to disable security 
+//Gmail Config
 //define('MAILPORT', 465);
 //define('MAILHOST', 'smtp.gmail.com');
-//define('MAILUSERNAME', 'example.email.com');
-//define('MAILPASSWORD', 'password');
+//define('MAILUSERNAME', '');
+//define('MAILPASSWORD', '');
 
 
 //Mail Trap  configurations
-define('TESTMAIL', 'example.email.com');
+define('TESTMAIL', 'chrisdebbra@gmail.com');
 define('MAILPORT', 2525);
 define('MAILHOST', 'smtp.mailtrap.io');
-define('MAILUSERNAME', 'username');
-define('MAILPASSWORD', 'secret');
+define('MAILUSERNAME', '3752afd18ff364');
+define('MAILPASSWORD', '79f8cad7e8f3a0');
