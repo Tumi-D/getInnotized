@@ -1,24 +1,10 @@
 {
   "require": {
-    "twitter/bootstrap": "^4.0",
-    "datatables/datatables": "^1.10",
-    "fortawesome/font-awesome": "^4.7",
-    "driftyco/ionicons": "^2.0.1",
-    "components/jqueryui": "^1.12",
-    "components/jquery": "^3.2",
     "phpmailer/phpmailer": "^6.0",
-    "semantic/ui": "^2.3",
     "psr/log": "^1.1",
-    "league/oauth2-google": "^3.0",
-    "hayageek/oauth2-yahoo": "^2.0",
-    "stevenmaguire/oauth2-microsoft": "^2.2",
-    "firebase/php-jwt": "^5.0",
-    "twbs/bootstrap": "^4.3",
     "symfony/console": "^5.0",
     "illuminate/database": "^6.15",
-    "twilio/sdk": "^6.0",
-    "psy/psysh": "@stable",
-    "latte/latte": "^2.6"
+    "psy/psysh": "@stable"
   },
   "autoload": {
     "psr-4": {

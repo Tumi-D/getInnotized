@@ -14,4 +14,3 @@ filetmp/
 .php_cs.cache
 public/large
 applications/
-composer.lock
