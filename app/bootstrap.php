@@ -10,9 +10,6 @@ require_once 'helpers/validation.php';
 
 // Load everything we require via composer
 require('../vendor/autoload.php');
-$latte = new Latte\Engine;
-$latte->setTempDirectory(SRCROOT . '/Tempdir');
-$latte->setAutoRefresh(true);
 
 
 
