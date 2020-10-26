@@ -5,9 +5,8 @@ use Twilio\TwiML\MessagingResponse;
 use Twilio\TwiML\Voice\Say;
 
 /**
- *validate() checks if posts is empty else returns an array 
- *containing the post request by default return an array of errors.
- *if  validation rules are not specified 
+ *validate() checks various validation rules and returns specific errors for said rules
+ *per method specified examples as a json or to a specific route.
  * @param  array
  * @param  array
  * @return array
@@ -16,6 +15,10 @@ function validate($rules = [], $page = '', $exceptions = [])
 {
     // sendSMS();
     // validatePhoneNumber('0267205395');
+    foreach ($rules as $key => $value) {
+        $key = $_POST[$key] = isset($_POST[$key]) ? $_POST[$key] : '';
+    }
+
 
     // makeCall();
     $errors = array();
@@ -36,22 +39,31 @@ function validate($rules = [], $page = '', $exceptions = [])
         $errors = checkMinLength($rules,  $errors);
         $errors = checkMaxLength($rules,  $errors);
         $errors = checkIFNumeric($rules, $errors);
+        $errors = validateFiles($rules, $errors);
         $errors = checkForUrl($rules, $errors);
         $errors = sanitizeErrors($errors);
         // return $errors;
+        $errorinfo = array(
+            'error' => $errors,
+            // 'version' => "1.0.0",
+            // 'company' => "Softmasters Group",
+            "software" => COMPANYNAME
+        );
         //Update will implement later
         if (count((array) $errors) && $page != '' && $page != "json") {
             $data['error'] =   $errors;
             $error = new Controller();
             $error->view($page, $data);
             die;
-        } elseif ($page != '' && $page == 'json') {
-            echo json_encode($errors);
+        } elseif ($page != '' && $page == 'json' && count((array) $errors)) {
+            header('Content-Type,application/json');
+            echo json_encode($errorinfo);
             die;
         } elseif ($page == '') {
             return $errors;
-        } else {
-            return  $errors;
+        }
+        else {
+            return $errors;
         }
     }
 }
@@ -100,7 +112,7 @@ function checkIFNumeric($rules = [],  $errors = array())
     foreach ($rules as $key => $value) {
         $array = explode('|', $value);
         if (!empty(testinput($_POST[$key]) && in_array('numeric', $array) && !is_numeric(testinput($_POST[$key])))) {
-            $message = array($key => array($key . ' Value must be a number'));
+            $message = array($key => array($key . ' value must be a number'));
             array_push($errors, $message);
         }
     }
@@ -119,7 +131,7 @@ function checkIsRequired($rules = [],  $errors = array())
 
     foreach ($rules as $key => $value) {
         $array = explode('|', $value);
-        if (testinput(empty($_POST[$key]) && in_array('required', $array))) {
+        if (testinput(isset($_POST[$key]) && empty($_POST[$key]) && in_array('required', $array))) {
             $message = array($key => array($key . ' field is required'));
             array_push($errors, $message);
         }
@@ -138,7 +150,7 @@ function checkMinLength($rules = [],  $errors = array())
     foreach ($rules as $key => $myvalue) {
         $array = explode('|', $myvalue);
         foreach ($array as $int => $value) {
-            if (preg_match('/min/', $value)) {
+            if (preg_match('/min/', $value) && !empty($_POST[$key])) {
                 $max = explode(':', $value);
                 $maxvalue = $max[1];
                 $value = $_POST[$key];
@@ -186,9 +198,15 @@ function checkMaxLength($rules = [],  $errors = array())
  */
 function checkEmailValidity($rules = [],  $errors = array())
 {
+    // if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //     echo ("$email is a valid email address");
+    // } else {
+    //     echo ("$email is not a valid email address");
+    // }
+    // !preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/", testinput($_POST[$key])
     foreach ($rules as $key => $value) {
         $array = explode('|', $value);
-        if (in_array('email', $array) && !empty($_POST[$key]) && !preg_match("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/", testinput($_POST[$key]))) {
+        if (in_array('email', $array) && !empty($_POST[$key]) && !filter_var($_POST[$key], FILTER_VALIDATE_EMAIL)) {
             $message = array($key => array($key . ' is invalid  .Email  is incorrect'));
             array_push($errors, $message);
         }
@@ -247,25 +265,15 @@ function  checkUniqueFields($rules = [],  $errors = array())
             if (preg_match('/unique/', $value) && !empty($_POST[$key])) {
                 $table = explode(':', $value);
                 $querytable = $table[1];
+
                 // dd($querytable);
                 if (checkifFieldExists($querytable, testinput($_POST[$key]))) {
-                    $message = array($key => array("Sorry! " . $_POST[$key] . ' is already being used'));
+                    $message = array($key => array("Sorry! " . $key . ' is already being used'));
                     array_push($errors, $message);
                 }
             }
         }
     }
-    // foreach ($rules as $key => $value) {
-    //     $array = explode('|', $value);
-    //     //This ugly piece of code here gets the table we want to query
-    //     if (preg_match('/unique/', $value)) {
-    //         $table = explode(':', $value);
-    //         $querytable = explode('|', $table[1]);
-    //         checkifFieldExists($querytable[0], testinput($_POST[$key]));
-    //         $message = array($key => array("Sorry! " . $_POST[$key] . ' is already being used'));
-    //         array_push($errors, $message);
-    //     }
-    // }
     return $errors;
 }
 
@@ -291,6 +299,87 @@ function checkifFieldExists($table, $values)
                 return true;
             }
         }
+    }
+}
+
+
+/**
+ *Validate Files
+ * @param  array rules
+ * @param  array errors
+ * @return array errors
+ */
+function validateFiles($rules = [],  $errors = array())
+{
+    foreach ($rules as $key => $value) {
+        $array = explode('|', $value);
+        if (in_array('file', $array)) {
+            foreach ($array as $int => $value) {
+                if (preg_match('/mimes/', $value) && !empty($_FILES[$key])) {
+                    $mimes = explode(':', $value);
+                    $filemimes = explode(',', $mimes[1]);
+                    $info = new SplFileInfo($_FILES[$key]['name']);
+                    $fileextension = $info->getExtension();
+                    if (!in_array($fileextension, $filemimes)) {
+                        $message = array($key => array("Sorry, only $mimes[1] files are allowed"));
+                        array_push($errors, $message);
+                    }
+                }
+                if (preg_match('/size/', $value) && !empty($_FILES[$key])) {
+                    $size = explode(':', $value);
+                    $filesize = (int) $size[1];
+                    if ($filesize < $_FILES[$key]['size']) {
+                        $message = array($key => array("Sorry, your file is too large uploaded {$_FILES[$key]['size']}"));
+                        array_push($errors, $message);
+                        // break;
+                    }
+                }
+            }
+            if (in_array('empty', $array) && empty($_FILES)) {
+                $message = array($key => array("$key file is required"));
+                array_push($errors, $message);
+            }
+        }
+        // if(in_array('file.*', $array)) {
+        //     if (in_array('empty', $array)){
+        //         foreach ($array as $int => $value) {
+        //             foreach ($_FILES as $name => $file) {
+        //                 if (empty($file)) {
+        //                     $message = array($key => array("$key file at index[$name] is empty"));
+        //                     array_push($errors, $message);
+        //                 }
+        //                 if (preg_match('/size/', $value) && !empty($file)) {
+        //                     $size = explode(':', $value);
+        //                     $filesize = (int) $size[1];
+        //                     if ($filesize < $file['size']) {
+        //                         $message = array($key => array("Sorry, $key file at index[$name]  is too large"));
+        //                         array_push($errors, $message);
+        //                     }
+        //                 }
+        //             }
+        //         }
+               
+        //     }
+        // }
+    }
+    // dd($errors);
+    return $errors;
+}
+
+/**
+ *Checks if database for the value being looked for exists
+ * @param  array rules
+ * @param  array errors
+ * @return bool validity
+ */
+function checkIFValueExistsOnColumn($table, $column, $value)
+{
+    global $connectedDb;
+    $getuniquecount = "SELECT count(*) as count from $table where $column  LIKE '%$value%'";
+    $connectedDb->prepare($getuniquecount);
+    $count = $connectedDb->fetchColumn();
+    if ($count > 0) {
+        return true;
     }
 }
 
@@ -432,7 +521,7 @@ function errors($valuekey)
         $errors = $valuekey;
         if (is_array($errors)) {
             foreach ($errors as $key => $error) {
-                echo $error;
+                echo $error . "<br/>";
             }
         } else {
             echo $errors;
@@ -486,3 +575,26 @@ function Toast($valuekey, $type = 'error')
         return false;
     }
 }
+
+/**
+ * Show Errors
+ * @param  mixed errorbject with valuekey
+ * @return bool true
+ */
+function bootstrapSuccess($valuekey)
+{
+    if (isset($valuekey)) {
+        $errors = $valuekey;
+        if (is_array($errors)) {
+            foreach ($errors as $key => $error) {
+                echo "<div id='manyalerts' class='alert alert-success alert-dismissible'> <strong>Success!  </strong>$error<button type='button' class='close' data-dismiss='alert'>&times;</button></div> ";
+            }
+        } else {
+            echo "<div id='singlealert' class='alert alert-success alert-dismissible'> <strong>Success!   </strong>$errors<button type='button' class='close' data-dismiss='alert'>&times;</button></div> ";
+        }
+        return true;
+    } else {
+        return false;
+    }
+}
+
