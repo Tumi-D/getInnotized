@@ -1,6 +1,7 @@
 <?php
 
 // use PHPMailer\PHPMailer\PHPMailer;
+use Latte\Engine;
 
 function generateApikey()
 {
@@ -46,6 +47,22 @@ function randomToken($length = 5)
     if (function_exists('openssl_random_pseudo_bytes')) {
         return bin2hex(openssl_random_pseudo_bytes($length));
     }
+}
+
+function view($path,$data)
+{
+    try {
+        $path = APPROOT."\\views\\$path.latte";
+        $latte = new Engine;
+        $latte->setTempDirectory(APPROOT."\\temp\\");
+        // render to output
+        $latte->render($path, $data);
+    } catch (\Throwable $th) {
+        echo json_encode($th->getMessage());
+    }
+   
+    // or render to string
+    // $html = $latte->renderToString('template.latte', $params);
 }
 
 function generateOtp()
