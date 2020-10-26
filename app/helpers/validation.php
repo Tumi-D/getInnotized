@@ -68,19 +68,6 @@ function validate($rules = [], $page = '', $exceptions = [])
     }
 }
 
-// function manipulateString($rules = [])
-// {
-//     foreach ($rules as $key => $myvalue) {
-//         $array = explode('|', $myvalue);
-//         foreach ($array as $key => $value) {
-//             if (preg_match('/min/', $value)) {
-//                 $array = explode(':', $value);
-//                 echo $array[1] . "<br/>";
-//             }
-//         }
-//     }
-//     dd('done');
-// }
 /**
  *checkPhoneValidity() checks if parameter is required
  * @param  array rules
@@ -362,7 +349,6 @@ function validateFiles($rules = [],  $errors = array())
         //     }
         // }
     }
-    // dd($errors);
     return $errors;
 }
 

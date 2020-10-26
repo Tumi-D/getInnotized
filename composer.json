@@ -4,11 +4,19 @@
     "psr/log": "^1.1",
     "symfony/console": "^5.0",
     "illuminate/database": "^6.15",
-    "psy/psysh": "@stable"
+    "latte/latte": "^2.8"
   },
   "autoload": {
+    "files": [
+      "app/config/config.php",
+      "app/config/config_env.php",
+      "app/helpers/general_helper.php",
+      "app/helpers/email.php",
+      "app/helpers/validation.php"
+  ],
     "psr-4": {
-      "Console\\": "src"
+      "Console\\": "src",
+      "App\\": "app/"
     },
     "classmap": [
       "src"
@@ -16,6 +24,7 @@
   },
   "require-dev": {
     "fzaninotto/faker": "^1.9",
-    "symfony/var-dumper": "^5.0"
+    "symfony/var-dumper": "^5.0",
+    "psy/psysh": "@stable"
   }
 }

@@ -1,20 +1,7 @@
 <?php
 
-// Including the configuration file
-require_once 'config/config.php';
-require_once 'config/config_env.php';
-require_once 'helpers/general_helper.php';
-require_once 'helpers/email.php';
-require_once 'helpers/validation.php';
-
-
 // Load everything we require via composer
 require('../vendor/autoload.php');
-
-
-
-// or render to string
-// $html = $latte->renderToString('template.latte', $parameters);
 
 /*
  * Autoload Core Libraries
