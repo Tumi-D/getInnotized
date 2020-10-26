@@ -65,30 +65,7 @@ function view($path,$data)
     // $html = $latte->renderToString('template.latte', $params);
 }
 
-function generateOtp()
-{
 
-    $value = 0;
-
-    if (function_exists('mt_rand')) {
-        do {
-            $value = mt_rand(100000, 999999);
-        } while ($value ==  Otp::checkOtp($value));
-        return $value;
-    }
-    if (function_exists('rand')) {
-        do {
-            $value = rand(100000, 999999);
-        } while ($value ==  Otp::checkOtp($value));
-        return $value;
-    }
-    if (function_exists('random_int')) {
-        do {
-            $value = random_int(100000, 999999);
-        } while ($value ==  Otp::checkOtp($value));
-        return $value;
-    }
-}
 
 function testinput($input)
 {
