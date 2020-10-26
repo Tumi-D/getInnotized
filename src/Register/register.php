@@ -6,6 +6,7 @@ use Console\App\Commands\MakemodelCommand;
 use Console\App\Commands\MakeControllerCommand;
 use Console\App\Commands\MakefakesCommand;
 use Console\App\Commands\MakeMigrationCommand;
+use Console\App\Commands\RouteListCommand;
 use Console\App\Commands\RunMigrationCommand;
 use Console\App\Commands\RunPlaygroundCommand;
 use Console\App\Commands\SeedFactoryCommand;
@@ -21,5 +22,5 @@ $app->add(new SeedFactoryCommand());
 $app->add(new RunMigrationCommand());
 $app->add(new TruncateTablesCommand());
 $app->add(new RunPlaygroundCommand());
-
+$app->add(new RouteListCommand());
 $app->run();
