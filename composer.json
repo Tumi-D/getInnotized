@@ -25,6 +25,7 @@
   "require-dev": {
     "fzaninotto/faker": "^1.9",
     "symfony/var-dumper": "^5.0",
-    "psy/psysh": "@stable"
+    "psy/psysh": "@stable",
+    "maximebf/debugbar": "1.*"
   }
 }
