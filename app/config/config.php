@@ -23,18 +23,10 @@ define('VENDORROOT', dirname(dirname(dirname(__FILE__))));
 
 
 define('URLROOT', 'https://umo.local/');
-define('GMAPSAPI', 'AIzaSyB1nEal4lqDWdBz9mf79KUd0zGZdgArVfY');
-
-//Gmail Config
-//define('MAILPORT', 465);
-//define('MAILHOST', 'smtp.gmail.com');
-//define('MAILUSERNAME', '');
-//define('MAILPASSWORD', '');
-
 
 //Mail Trap  configurations
-define('TESTMAIL', 'chrisdebbra@gmail.com');
-define('MAILPORT', 2525);
-define('MAILHOST', 'smtp.mailtrap.io');
-define('MAILUSERNAME', '3752afd18ff364');
-define('MAILPASSWORD', '79f8cad7e8f3a0');
+define('TESTMAIL', '');
+define('MAILPORT', '');
+define('MAILHOST', '');
+define('MAILUSERNAME', '');
+define('MAILPASSWORD', '');
