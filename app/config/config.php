@@ -22,7 +22,7 @@ define('SRCROOT', dirname(dirname(dirname(__FILE__))) . "\src");
 define('VENDORROOT', dirname(dirname(dirname(__FILE__))));
 
 
-define('URLROOT', 'https://umo.local/');
+define('URLROOT', 'http://test.local/');
 
 //Mail Trap  configurations
 define('TESTMAIL', '');
