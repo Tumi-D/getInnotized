@@ -12,13 +12,13 @@ define('JSVARS', serialize(array(
 )));
 
 if (!defined('SITENAME')) {
-    define('SITENAME', 'UNIVERSAL MONEY AGENCY PLATFROM');
+    define('SITENAME', 'INNOTIZE SITE');
 }
 
-define('COMPANYNAME', 'UMO');
+define('COMPANYNAME', 'GETINNOTIZED');
 
 define('EMAILS_FOR_ERROR_ALERT', [
-    'bryan@getinnotized.com'
+    'examplemail@gmail.com'
 ]);
 
 // Default color, if the local constant is not set
