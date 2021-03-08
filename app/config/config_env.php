@@ -41,19 +41,6 @@ define('STRING', 3);
 define('REQUEST_METHOD_NOT_VALID',  101);
 define('REQUEST_CONTENTTYPE_NOT_VALID',  102);
 define('REQUEST_NOT_VALID',  103);
-define('VALIDATE_PARAMETER_REQUIRED',  104);
-define('VALIDATE_DATATYPE_REQUIRED',  105);
-define('API_NAME_REQUIRED',  106);
-define('API_PARAM_REQUIRED',  107);
-define('API_DOES_NOT_EXIST',  108);
-define('INCORRECT_FIELD_NAME',  109);
-define('INVALID_USER_CREDENTIALS',  205);
-define('SUCCESS_RESPONSE',  200);
-define('AUTHORIZATION_HEADER_NOT_FOUND', 505);
-define('INVALID_AUTH_TOKEN', 506);
-define('JWT_PROCESSING_ERROR', 508);
-
-define('SECRET_KEY', '123456');
 
 //Load Eloquence
 require_once  SRCROOT . '/Register/eloquence.php';
